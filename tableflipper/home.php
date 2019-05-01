@@ -107,9 +107,12 @@ html {
   <h1>Home Page</h1>
 </div>
 
+
+
 <div class="row">
   <div class="col-3 col-s-3 menu">
     <ul>
+    <li><a href="logout.php"> LOGOUT</a> </li>
       <li><a href="home.php"> HOME</a> </li>
       <li><a href="product.php"> ITEMS</a> </li>
       <li><a href="sales.php"> SALES</a> </li>
@@ -127,7 +130,7 @@ html {
     
   </div>
 </div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <div class="footer">
   <p>Stop Table Flipping And Buy Here</p>
 </div>

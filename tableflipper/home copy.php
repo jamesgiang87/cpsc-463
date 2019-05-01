@@ -106,6 +106,12 @@ html {
 <div class="header">
   <h1>Product Page</h1>
 </div>
+<ul class="dropdown-menu">
+<li class="last">
+<a href="logout.php">
+<i class="glyphicon glyphicon-off"></i>
+Logout
+</a>
 
 <div class="row">
   <div class="col-3 col-s-3 menu">
