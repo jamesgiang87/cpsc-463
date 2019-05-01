@@ -14,7 +14,7 @@ if(empty($errors)){
     //Update Sign in time
      updateLastLogIn($user_id);
      $session->msg("s", "Welcome to TABLE FLIPPERS.");
-     redirect('home.php',false);
+     redirect('au.php',false);
 
   } else {
     $session->msg("d", "Sorry Username/Password incorrect.");

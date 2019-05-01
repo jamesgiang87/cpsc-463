@@ -1,4 +1,10 @@
 
+<?php
+    $page_title = 'product Page';
+    require_once('includes/load.php');
+    if (!$session->isUserLoggedIn(true)) { redirect('index.php', false);}
+    ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -106,18 +112,13 @@ html {
 <div class="header">
   <h1>Product Page</h1>
 </div>
-<ul class="dropdown-menu">
-<li class="last">
-<a href="logout.php">
-<i class="glyphicon glyphicon-off"></i>
-Logout
-</a>
+
 
 <div class="row">
   <div class="col-3 col-s-3 menu">
     <ul>
       <li><a href="home.php"> HOME</a> </li>
-      <li><a href="product.php"> ITEMS</a> </li>
+      
       
       
     </ul>
@@ -126,6 +127,21 @@ Logout
   <div class="col-6 col-s-9">
     <h1>Product Item</h1>
     <p>descriptions of product</p>
+
+    <table class="table table-striped table-bordered table-hover table-condensed">
+<thead>
+
+	<tr>
+		<th>BARCODE</th>
+		<th>NUMBER</th>
+		<th>NAME</th>
+		<th>TYPE</th>
+		<th>INFO</th>
+        <th>IMAGE</th>
+
+	</tr>
+</thead>
+<tbody>
   </div>
 
   <div class="col-3 col-s-12">
