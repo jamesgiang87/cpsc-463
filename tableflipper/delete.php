@@ -7,7 +7,7 @@
 	$sql = "DELETE FROM inventory WHERE BARC = '$_GET[id]'";
     
 				
-    if( mysqli_query($con,$sql) && mysqli_query($con,$sql2)){
+    if( mysqli_query($con,$sql) ){
 		
         echo '<script language="javascript">';
         echo 'alert("Item deleted.")';

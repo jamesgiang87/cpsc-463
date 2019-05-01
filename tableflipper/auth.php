@@ -13,8 +13,8 @@ if(empty($errors)){
      $session->login($user_id);
     //Update Sign in time
      updateLastLogIn($user_id);
-     $session->msg("s", "Welcome to Beyond Shoppers.");
-     redirect('home.php',false);
+     $session->msg("s", "Welcome to TABLE FLIPPERS.");
+     redirect('product.php',false);
 
   } else {
     $session->msg("d", "Sorry Username/Password incorrect.");

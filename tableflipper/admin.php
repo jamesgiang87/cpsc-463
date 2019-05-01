@@ -1,5 +1,5 @@
 <?php
-  $page_title = 'Admin Home Page';
+  $page_title = 'Admin product Page';
   require_once('includes/load.php');
   // Checkin What level user has permission to view this page
    page_require_level(1);
@@ -65,7 +65,7 @@
       <div class="panel">
         <div class="jumbotron text-center">
          
-           <p> <strong>Beyond Shoppers</strong> 
+           <p> <strong>TABLE FLIPPERS</strong> 
            
 
         </div>

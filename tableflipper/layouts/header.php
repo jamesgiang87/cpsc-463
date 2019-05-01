@@ -16,7 +16,7 @@
 <body>
 <?php  if ($session->isUserLoggedIn(true)): ?>
 <header id="header">
-<div class="logo pull-left"><a href="index.php" style="color:black" >Beyond Shopper</a>  </div>
+<div class="logo pull-left"><a href="index.php" style="color:black" >TABLE FLIPPERS</a>  </div>
 <div class="header-content">
 <div class="pull-right clearfix">
 <ul class="info-menu list-inline list-unstyled">
