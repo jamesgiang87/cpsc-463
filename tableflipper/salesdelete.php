@@ -5,9 +5,9 @@
 	
 	// delete product
 	$sql = "DELETE FROM sales WHERE BARCODE = '$_GET[id]'";
-    $sql2 = " update location set oc = 0 , itnum = 'null' where itnum = '$_GET[id]' ";
+    
 				
-    if( mysqli_query($con,$sql) && mysqli_query($con,$sql2)){
+    if( mysqli_query($con,$sql) ){
 		
         echo '<script language="javascript">';
         echo 'alert("Item deleted.")';

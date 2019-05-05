@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,7 +113,6 @@ th, td {
 
 tr:nth-child(even) {background-color: #f2f2f2;}
 </style>
-    
 </head>
 <body>
 
@@ -125,11 +125,6 @@ tr:nth-child(even) {background-color: #f2f2f2;}
   <div class="col-3 col-s-3 menu">
     <ul>
       <li><a href="cproduct.php"> HOME</a> </li>
-    <li><a href="index.php"> LOGIN</a> </li>
-    <li><a href="usersettings.php"> USER SETTINGS</a> </li>
-    
-    <li><a href="logout.php"> LOGOUT</a></li><br>
-    <img src= "images/Top-10-Online-Shopping-Site.jpg" width="300" height="250">
       
       
       
@@ -137,8 +132,8 @@ tr:nth-child(even) {background-color: #f2f2f2;}
  </div>
 
   <div class="col-6 col-s-9">
+    <h1>Descriptions of Product</h1>
     
-
     <table >
 <thead>
 
@@ -148,70 +143,63 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 		<th>TYPE</th>
 		<th>INFO</th>
         <th>IMAGE</th>
+    
+    
 
 	</tr>
 </thead>
 <tbody>
   </div>
 
-  
-
-
-
-	<?php
-		
-		// establish connction 
-		$con = mysqli_connect('127.0.0.1','root', '');
-		
-		// select database
-		mysqli_select_db($con,'tableflipper');
-		
-        $sql2 = "SELECT * FROM inventory   ";
-        $loca =mysqli_query($con,$sql2);
-      
-
-			// output all products currently in inventory
-			while($row = mysqli_fetch_array($loca) ){
+    <?php
+        $con = mysqli_connect('127.0.0.1','root','');
+          
+        mysqli_select_db($con,'tableflipper');
+        
+        // delete product
+        $sql = "SELECT * FROM inventory WHERE  BARC  = '$_GET[id]'";
+        $loca =mysqli_query($con,$sql);
+              
+        while($row = mysqli_fetch_array($loca) ){
                 
                
                 
-				echo "<tr >";
-				
-				echo "<td >".$row['NAME']."</td>";
-				echo "<td>".$row['TYPE']."</td>";
-				echo "<td>".$row['INFO']."</td>";
-                echo "<td><a href=lay.php?id=".$row['BARC']."><img src='images/".$row['image']."' width=\"100\" height=\"100\"></td>";
-                //echo "<img src='images/".$row['image']."' >";
-               
-			}
-	?>
+          echo "<tr >";
+          
+          echo "<td >".$row['NAME']."</td>";
+          echo "<td>".$row['TYPE']."</td>";
+          echo "<td>".$row['INFO']."</td>";
+          echo "<td><img src='images/".$row['image']."' width=\"100\" height=\"100\"></td>";
+                  //echo "<img src='images/".$row['image']."' >";
+            
+            
+            
+            
+            //add to cart
+            
+            
+            echo "<td><a href=cart.php?id=".$row['BARC'].">Add To Cart</a></td>";
+            
+        }
+          ?>
+   
 </table>
-</div>
-<div class="col-3 col-s-12">
-    
-    <div class="menu li"><ul>
-    <li><a href="shoppingcart.php"> SHOPPING CART</a> </li>
-    <li><a href="vieworder.php"> PURCHASES</a> </li>
+
     </div>
+    <div class="col-3 col-s-12">
     <div class="shopCart">
-      <h2>Buy Now</h2>
-	  <form action="checkout.php" method="post">
-	  <input type="submit" value="Checkout" />
-	  </form>
+    <h2>Buy Now</h2>
+    <form action="product1.php" method="post">
+    <input type="submit" value="Checkout" />
+    </form>
     
     </div>
-    <br>
-    <img src= "images/onlineshopping1_1280-1-770x433.jpg" width="250" height="200">
-  </div>
-</div>
     
-    
-    
-    
-<br><br><br><br><br><br><br><br><br><br><br>
-<div class="footer">
-  <p>Stop Table Flipping And Buy Here</p>
-</div>
+    </div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <div class="footer">
+    <p>Stop Table Flipping And Buy Here</p>
+    </div>
+
 </body>
 </html>
-

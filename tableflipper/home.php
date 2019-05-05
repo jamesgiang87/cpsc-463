@@ -1,4 +1,8 @@
-
+<?php
+    $page_title = 'product Page';
+    require_once('includes/load.php');
+    if (!$session->isUserLoggedIn(true)) { redirect('index.php', false);}
+    ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -124,13 +128,14 @@ html {
   <div class="col-6 col-s-9">
     <h1>WELCOME TO MY TABLE FLIPPER</h1>
     <p>Home Page</p>
+    <img src= "images/Top-10-Online-Shopping-Site.jpg" width="500" height="400">
   </div>
 
   <div class="col-3 col-s-12">
-    
+  <img src= "images/onlineshopping1_1280-1-770x433.jpg" width="250" height="200">
   </div>
 </div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <div class="footer">
   <p>Stop Table Flipping And Buy Here</p>
 </div>

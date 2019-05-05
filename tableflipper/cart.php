@@ -4,7 +4,6 @@
     if (!$session->isUserLoggedIn(true)) { redirect('index.php', false);}
     ?>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -105,7 +104,6 @@ width: 100%;
     .col-11 {width: 91.66%;}
     .col-12 {width: 100%;}
 }
-
 table {
     border-collapse: collapse;
 width: 100%;
@@ -118,61 +116,48 @@ padding: 8px;
 
 tr:nth-child(even) {background-color: #f2f2f2;}
     </style>
-    </head>
-<body>
 
-    <div class="header">
-    <h1>YOUR ORDERS</h1>
-    </div>
-    
-    <div class="row">
-    <div class="col-3 col-s-3 menu">
-    <ul>
-    <li><a href="cproduct.php"> HOME</a> </li>
-    
-    
-    </ul>
-    </div>
-    <div class="col-6 col-s-9">
-<table >
-<thead>
 
-	<tr>
-		<th>ORDER NUMBER</th>
-		<th>ITEM NAME</th>
-        <th>PRICE</th>
-		<th>PURCHASE DATE</th>
-	</tr>
-</thead>
-<tbody>
 	<?php
-        $customer = $_SESSION['username']; 
+    session_start();
+    // establish connection
+    $con = mysqli_connect('127.0.0.1','root','');
     
-		$con = mysqli_connect('127.0.0.1','root', '');
-		mysqli_select_db($con,'tableflipper');
+    // select database
+    mysqli_select_db($con,'tableflipper');
     
-        $query2 = "SELECT SALES_NUM, NAME, SELLPRICE, PURCHASE_DATE FROM sales WHERE USERNAME = '$customer'";
-        $display = mysqli_query($con,$query2);
+    $currentuser = $_SESSION['username'];
+    
+    
+    
+    $item = $_GET['id'];
+    $sql = "SELECT * FROM inventory WHERE  BARC  = '$_GET[id]'";
+    $result = mysqli_query($con,$sql);
+    $row = mysqli_fetch_row($result);
+    $result_num =  $row[1];
+    $result_name =  $row[2];
+    $result_price = $row[6];
+   
+    $sql1 = "INSERT INTO shoppingcart(USERNAME,NAME, NUM,PRICE) VALUES ('$currentuser', '$result_name',$result_num,'$result_price')";
+    
+    
+    if( mysqli_query($con,$sql1) ){
+        
+        echo '<script language="javascript">';
+        
+        echo 'alert("Item has been added.")';
+        echo '</script>';
+        echo '<script>window.location.href = "cproduct.php";</script>';
+        
+        
+    }
+    
+    else{
+        echo '<script language="javascript">';
+        echo 'alert("Error! Item not added.")';
+        echo '</script>';
+        echo '<script>window.location.href = "cproduct.php";</script>';
+    }
       
-			// Output customer's orders
-			while($row = mysqli_fetch_array($display) ){
-                
-				echo "<tr>";
-				echo "<td>".$row['SALES_NUM']."</td>";
-				echo "<td>".$row['NAME']."</td>";
-                echo "<td>".$row["SELLPRICE"]."</td>";
-				echo "<td>".$row['PURCHASE_DATE']."</td>";
-			}
+			
 	?>
-</table>
-    </div>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <div class="footer">
-    <p>Stop Table Flipping </p>
-    </div>
-    </body>
-    </html>
-
-
-</body>
-</html>

@@ -3,8 +3,6 @@
     require_once('includes/load.php');
     if (!$session->isUserLoggedIn(true)) { redirect('index.php', false);}
     ?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -105,7 +103,6 @@ width: 100%;
     .col-11 {width: 91.66%;}
     .col-12 {width: 100%;}
 }
-
 table {
     border-collapse: collapse;
 width: 100%;
@@ -118,61 +115,119 @@ padding: 8px;
 
 tr:nth-child(even) {background-color: #f2f2f2;}
     </style>
+    
     </head>
 <body>
-
-    <div class="header">
-    <h1>YOUR ORDERS</h1>
-    </div>
     
-    <div class="row">
+    <div class="header">
+    <h1>Shopping Cart Page</h1>
+    </div>
     <div class="col-3 col-s-3 menu">
     <ul>
-    <li><a href="cproduct.php"> HOME</a> </li>
-    
-    
-    </ul>
-    </div>
-    <div class="col-6 col-s-9">
-<table >
-<thead>
+    <li><a href="cproduct.php"> HOME</a> </li></div>
 
-	<tr>
-		<th>ORDER NUMBER</th>
-		<th>ITEM NAME</th>
-        <th>PRICE</th>
-		<th>PURCHASE DATE</th>
-	</tr>
-</thead>
-<tbody>
-	<?php
-        $customer = $_SESSION['username']; 
-    
+
+<?php
+// SESSION_START used to keep TOTAL
+
+
+		// establish connction 
 		$con = mysqli_connect('127.0.0.1','root', '');
+		
+		// select database
 		mysqli_select_db($con,'tableflipper');
-    
-        $query2 = "SELECT SALES_NUM, NAME, SELLPRICE, PURCHASE_DATE FROM sales WHERE USERNAME = '$customer'";
-        $display = mysqli_query($con,$query2);
-      
-			// Output customer's orders
-			while($row = mysqli_fetch_array($display) ){
-                
+		
+		// store current user's username
+		$currentuser = $_SESSION['username'];
+		
+		// select table from database
+        $sql2 = "SELECT * FROM shoppingcart WHERE username = '$currentuser'";
+		
+		// query all data from that table
+        $records = mysqli_query($con,$sql2);
+?>
+
+
+
+<?php 
+	// If no items in user's cart
+	if (mysqli_num_rows($records)==0){?>
+		<h1>Your Cart is Empty
+<?php
+		}
+	// If 1 or more items in user's cart
+	else{?>
+
+<!-- Output Shopping Cart Table -->
+        <div class="col-6 col-s-9"><div class="menu li">
+<table >
+	<thead>
+		<tr>
+			<th>Item Name</th>
+			<th>Price</th>
+		</tr>
+	</thead>
+
+
+<?php
+// Create $sum to hold TOTAL of Shopping Cart
+$sum = "0";
+
+// Fill table with any products user added to shopping cart
+while($row = mysqli_fetch_array($records) ){
+				
+				$sum += $row['PRICE']; // Calculate the TOTAL
+		
 				echo "<tr>";
-				echo "<td>".$row['SALES_NUM']."</td>";
 				echo "<td>".$row['NAME']."</td>";
-                echo "<td>".$row["SELLPRICE"]."</td>";
-				echo "<td>".$row['PURCHASE_DATE']."</td>";
-			}
-	?>
+				echo "<td>".$row['PRICE']."</td>";
+				
+				// Link to remove item from shopping cart
+				echo "<td><ul><li><a href=RemoveItem.php?id=".$row['num'].">Remove Item</a></td>";
+		
+		}
+}
+?>
 </table>
-    </div>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <div class="footer">
-    <p>Stop Table Flipping </p>
-    </div>
-    </body>
-    </html>
+</br>
 
+<?php
+// If Shopping Cart is not empty
+if (mysqli_num_rows($records)>=1){
+	echo " ";
+	echo "Subtotal: $".$sum; // Subtotal (before tax + shipping)
+	?></br><?php
+	echo "Shipping calculated at checkout";
+	$_SESSION['total'] = $sum; // Add TOTAL to Session Array to use during checkout
+}
+?>
+</br></br>
+	
+    </center>
+    </font>
+    </center>
+    </div></div>
 
+<?php
+	// If Shopping Cart is not empty, show 'Check Out' button
+	if (mysqli_num_rows($records)>=1){
+        ?><div class="col-3 col-s-12">
+        
+        
+        <div class="shopCart">
+        <h2>Buy Now</h2>
+        <form action="checkout.php" method="post">
+        <input type="submit" value="Checkout" />
+        </form>
+        
+        </div>
+        <br>
+        
+        </div>
+        </div><?php
+	}
+?>
+
+    
 </body>
 </html>

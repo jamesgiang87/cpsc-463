@@ -13,12 +13,12 @@
           
         <div class="form-group">
               <label for="username" class="control-label">Username</label>
-              <input type="name" class="form-control" name="username" placeholder="Username" required>
+              <input type="name" class="form-control"  name="username" placeholder="Username" required>
         </div>
           
           <div class="form-group">
             <label for="Password" class="control-label">Password</label>
-            <input type="password" name= "password" class="form-control" placeholder="Password" required>
+            <input type="password" name= "password" title="Six or more characters" class="form-control" placeholder="Password" required>
           </div>
           
           <div class="form-group">
@@ -68,7 +68,7 @@
           
         <div class="form-group">
               <label for="zip" class="control-label">Zip Code</label>
-              <input type="name" class="form-control" name="zip" placeholder="Zip" required>
+              <input type="name" class="form-control" name="zip" placeholder="Zip" maxlength="5" required>
         </div>
           
         <div class="form-group">
@@ -100,9 +100,9 @@
             $city = $_POST['city'];
             $state = $_POST['state'];
             $zip = $_POST['zip'];
+
             
             
-        
 			if($password==$cpassword)
 			{
                 //checks if unique username
@@ -114,6 +114,7 @@
 					//there is already a user with the same username
 					echo '<script type="text/javascript"> alert("Username already exists. Please try again.") </script>';					
 				}
+                
 				else
 				{
                     
@@ -129,6 +130,12 @@
                     
             if($addcust)
 				{
+                
+                 if((strlen($password) <  6) || (strlen($cpassword) < 6))
+            {
+                echo '<script type="text/javascript"> alert("Password is too short. Please try again.") </script>';
+            }
+                
                 echo '<script type="text/javascript"> alert("Account created. Please go back to the login page.") </script>';
                 echo '<script>window.location.href = "index.php";</script>';
 				}
